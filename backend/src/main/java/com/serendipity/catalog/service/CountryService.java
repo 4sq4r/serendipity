@@ -20,7 +20,7 @@ public class CountryService {
     }
 
     public List<Country> findAll() {
-        return countryRepository.findAll();
+        return countryRepository.findAll(CatalogSort.BY_NAME);
     }
 
     public Country getById(Long id) {

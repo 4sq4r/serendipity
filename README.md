@@ -240,6 +240,8 @@ User (id, email, password_hash, display_name, role, created_at)
 | `POST` / `PUT` / `DELETE` | `/admin/{countries,universities,languages,language-tests}` | `ADMIN` | Справочники |
 | `PUT` | `/admin/users/{id}/role` | `ADMIN` | Смена роли |
 
+Справочники (`/countries`, `/universities`, `/languages`, `/language-tests`) отдаются отсортированными по названию по возрастанию; сортировка выполняется в БД.
+
 Фильтр по несуществующему `countryId` или `languageId` в справочниках отвечает `404`, неположительный — `400`.
 
 Актуальная спецификация — Swagger UI: `http://localhost:8080/swagger-ui.html`.
@@ -364,7 +366,7 @@ cd frontend && npm test
 
 - [x] **Этап 0.** README — контекст проекта.
 - [x] **Этап 1. Каркас.** Spring Boot-проект, `docker-compose` (PostgreSQL + MinIO), Flyway, health-check, CI.
-- [ ] **Этап 2. Каталог.** Справочники стран, университетов, языков, языковых тестов.
+- [x] **Этап 2. Каталог.** Справочники стран, университетов, языков, языковых тестов.
 - [ ] **Этап 3. Материалы и файлы.** Сущности материалов, загрузка в MinIO, скачивание по pre-signed URL.
 - [ ] **Этап 4. Аутентификация.** Регистрация, JWT, роли.
 - [ ] **Этап 5. Frontend.** Каталог, карточка материала, скачивание, вход.
