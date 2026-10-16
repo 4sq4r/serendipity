@@ -22,7 +22,7 @@ public class CountryController {
     }
 
     @GetMapping(CatalogApi.COUNTRIES_PATH)
-    @Operation(summary = "List countries")
+    @Operation(summary = "List countries", description = CatalogApi.COUNTRIES_ORDER_DESCRIPTION)
     public List<CountryDto> listCountries() {
         return countryService.findAll();
     }

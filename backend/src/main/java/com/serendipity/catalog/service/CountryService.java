@@ -23,7 +23,7 @@ public class CountryService {
     }
 
     public List<CountryDto> findAll() {
-        return catalogMapper.toCountryDtos(countryRepository.findAll());
+        return catalogMapper.toCountryDtos(countryRepository.findAll(CatalogSort.BY_NAME));
     }
 
     public void ensureExists(Long id) {
