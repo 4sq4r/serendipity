@@ -1,7 +1,7 @@
 package com.serendipity.catalog.controller;
 
 import com.serendipity.catalog.dto.LanguageTestDto;
-import com.serendipity.catalog.service.LanguageTestService;
+import com.serendipity.catalog.facade.LanguageTestFacade;
 import com.serendipity.common.web.ApiPaths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = CatalogApi.TAG)
 public class LanguageTestController {
 
-    private final LanguageTestService languageTestService;
+    private final LanguageTestFacade languageTestFacade;
 
-    public LanguageTestController(LanguageTestService languageTestService) {
-        this.languageTestService = languageTestService;
+    public LanguageTestController(LanguageTestFacade languageTestFacade) {
+        this.languageTestFacade = languageTestFacade;
     }
 
     @GetMapping(CatalogApi.LANGUAGE_TESTS_PATH)
@@ -32,6 +32,6 @@ public class LanguageTestController {
     public List<LanguageTestDto> listLanguageTests(
             @Parameter(description = "Return only tests of this language")
             @RequestParam(required = false) @Positive Long languageId) {
-        return languageTestService.findAll(languageId);
+        return languageTestFacade.findAll(languageId);
     }
 }

@@ -1,7 +1,7 @@
 package com.serendipity.catalog.controller;
 
 import com.serendipity.catalog.dto.UniversityDto;
-import com.serendipity.catalog.service.UniversityService;
+import com.serendipity.catalog.facade.UniversityFacade;
 import com.serendipity.common.web.ApiPaths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = CatalogApi.TAG)
 public class UniversityController {
 
-    private final UniversityService universityService;
+    private final UniversityFacade universityFacade;
 
-    public UniversityController(UniversityService universityService) {
-        this.universityService = universityService;
+    public UniversityController(UniversityFacade universityFacade) {
+        this.universityFacade = universityFacade;
     }
 
     @GetMapping(CatalogApi.UNIVERSITIES_PATH)
@@ -32,6 +32,6 @@ public class UniversityController {
     public List<UniversityDto> listUniversities(
             @Parameter(description = "Return only universities of this country")
             @RequestParam(required = false) @Positive Long countryId) {
-        return universityService.findAll(countryId);
+        return universityFacade.findAll(countryId);
     }
 }

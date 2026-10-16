@@ -1,7 +1,7 @@
 package com.serendipity.catalog.controller;
 
 import com.serendipity.catalog.dto.CountryDto;
-import com.serendipity.catalog.service.CountryService;
+import com.serendipity.catalog.facade.CountryFacade;
 import com.serendipity.common.web.ApiPaths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = CatalogApi.TAG)
 public class CountryController {
 
-    private final CountryService countryService;
+    private final CountryFacade countryFacade;
 
-    public CountryController(CountryService countryService) {
-        this.countryService = countryService;
+    public CountryController(CountryFacade countryFacade) {
+        this.countryFacade = countryFacade;
     }
 
     @GetMapping(CatalogApi.COUNTRIES_PATH)
     @Operation(summary = "List countries")
     public List<CountryDto> listCountries() {
-        return countryService.findAll();
+        return countryFacade.findAll();
     }
 }
