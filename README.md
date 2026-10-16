@@ -240,6 +240,8 @@ User (id, email, password_hash, display_name, role, created_at)
 | `POST` / `PUT` / `DELETE` | `/admin/{countries,universities,languages,language-tests}` | `ADMIN` | Справочники |
 | `PUT` | `/admin/users/{id}/role` | `ADMIN` | Смена роли |
 
+Фильтр по несуществующему `countryId` или `languageId` в справочниках отвечает `404`, неположительный — `400`.
+
 Актуальная спецификация — Swagger UI: `http://localhost:8080/swagger-ui.html`.
 
 ---

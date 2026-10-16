@@ -19,6 +19,7 @@ repositories {
 
 ext {
     springdocVersion = '2.8.9'
+    mapstructVersion = '1.6.3'
     set('testcontainers.version', '1.21.4')
 }
 
@@ -30,6 +31,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     runtimeOnly 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
