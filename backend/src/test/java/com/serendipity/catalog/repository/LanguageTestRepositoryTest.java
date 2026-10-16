@@ -25,6 +25,7 @@ class LanguageTestRepositoryTest {
     private static final String IELTS_DESCRIPTION = "International English Language Testing System";
     private static final String TOEFL_NAME = "TOEFL";
     private static final String TESTDAF_NAME = "TestDaF";
+    private static final String TELC_NAME = "telc Deutsch";
     private static final String NAME_PROPERTY = "name";
     private static final long UNKNOWN_LANGUAGE_ID = -1L;
     private static final String INSERT_LANGUAGE_TEST_SQL = "INSERT INTO language_test (language_id, name) VALUES (?, ?)";
@@ -84,5 +85,17 @@ class LanguageTestRepositoryTest {
         List<LanguageTest> tests = languageTestRepository.findAllByLanguageId(english.getId(), Sort.by(NAME_PROPERTY));
 
         assertThat(tests).extracting(LanguageTest::getName).containsExactly(IELTS_NAME, TOEFL_NAME);
+    }
+
+    @Test
+    void sortsNamesAlphabeticallyRegardlessOfCase() {
+        Language german = languageRepository.save(new Language(GERMAN_CODE, GERMAN_NAME));
+        languageTestRepository.save(new LanguageTest(german, TESTDAF_NAME, null));
+        languageTestRepository.save(new LanguageTest(german, TELC_NAME, null));
+        languageTestRepository.flush();
+
+        List<LanguageTest> tests = languageTestRepository.findAllByLanguageId(german.getId(), Sort.by(NAME_PROPERTY));
+
+        assertThat(tests).extracting(LanguageTest::getName).containsExactly(TELC_NAME, TESTDAF_NAME);
     }
 }
