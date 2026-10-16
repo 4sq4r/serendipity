@@ -35,7 +35,9 @@ class HealthCheckIntegrationTest {
 
     @Test
     void flywayAppliesInitialMigration() {
-        assertThat(flyway.info().current()).isNotNull();
-        assertThat(flyway.info().current().getVersion().getVersion()).isEqualTo(INITIAL_MIGRATION_VERSION);
+        assertThat(flyway.info().applied())
+                .extracting(migration -> migration.getVersion().getVersion())
+                .contains(INITIAL_MIGRATION_VERSION);
+        assertThat(flyway.info().pending()).isEmpty();
     }
 }
