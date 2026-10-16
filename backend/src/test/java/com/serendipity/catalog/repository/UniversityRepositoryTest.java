@@ -29,8 +29,8 @@ class UniversityRepositoryTest {
     private static final String POLYTECHNIQUE_NAME = "École Polytechnique";
     private static final String NAME_PROPERTY = "name";
     private static final long UNKNOWN_COUNTRY_ID = -1L;
-    private static final String INSERT_UNIVERSITY_SQL = "INSERT INTO university (country_id, name) VALUES (?, ?)";
-    private static final String DELETE_COUNTRY_SQL = "DELETE FROM country WHERE id = ?";
+    private static final String INSERT_UNIVERSITY_SQL = "INSERT INTO universities (country_id, name) VALUES (?, ?)";
+    private static final String DELETE_COUNTRY_SQL = "DELETE FROM countries WHERE id = ?";
 
     @Autowired
     private UniversityRepository universityRepository;
