@@ -240,6 +240,8 @@ User (id, email, password_hash, display_name, role, created_at)
 | `POST` / `PUT` / `DELETE` | `/admin/{countries,universities,languages,language-tests}` | `ADMIN` | Справочники |
 | `PUT` | `/admin/users/{id}/role` | `ADMIN` | Смена роли |
 
+Фильтр по несуществующему `countryId` или `languageId` в справочниках отвечает `404`, неположительный — `400`.
+
 Актуальная спецификация — Swagger UI: `http://localhost:8080/swagger-ui.html`.
 
 ---
@@ -385,6 +387,7 @@ cd frontend && npm test
 | 7 | 2026-10-16 | Gradle на Groovy DSL вместо Kotlin DSL | Предпочтение команды |
 | 8 | 2026-10-16 | Локальный MinIO — образ `cgr.dev/chainguard/minio`, закреплённый по digest | Официальные образы `minio/minio` больше не публикуются на Docker Hub |
 | 9 | 2026-10-16 | Колонки `name` справочников — с ICU-коллацией `und-x-icu` | Образ `postgres:16-alpine` (musl) сортирует по байтам: `TestDaF` раньше `telc`, `École` после `Sorbonne`; ICU даёт алфавитный порядок на стороне БД |
+| 10 | 2026-10-16 | Слои `repository → service → [processor] → facade → controller` | Сервис отвечает только за свою сущность, маппинг DTO собран в фасаде, процессор связывает несколько сервисов без циклических зависимостей |
 
 Новое решение — новая строка. Отменённое решение не удаляется, а помечается как заменённое со ссылкой на новое.
 
