@@ -1,7 +1,6 @@
 package com.serendipity.catalog.service;
 
-import com.serendipity.catalog.dto.CountryDto;
-import com.serendipity.catalog.mapper.CatalogMapper;
+import com.serendipity.catalog.domain.Country;
 import com.serendipity.catalog.repository.CountryRepository;
 import com.serendipity.common.error.ResourceNotFoundException;
 import java.util.List;
@@ -15,20 +14,16 @@ public class CountryService {
     private static final String RESOURCE = "Country";
 
     private final CountryRepository countryRepository;
-    private final CatalogMapper catalogMapper;
 
-    public CountryService(CountryRepository countryRepository, CatalogMapper catalogMapper) {
+    public CountryService(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
-        this.catalogMapper = catalogMapper;
     }
 
-    public List<CountryDto> findAll() {
-        return catalogMapper.toCountryDtos(countryRepository.findAll(CatalogSort.BY_NAME));
+    public List<Country> findAll() {
+        return countryRepository.findAll(CatalogSort.BY_NAME);
     }
 
-    public void ensureExists(Long id) {
-        if (!countryRepository.existsById(id)) {
-            throw new ResourceNotFoundException(RESOURCE, id);
-        }
+    public Country getById(Long id) {
+        return countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(RESOURCE, id));
     }
 }
