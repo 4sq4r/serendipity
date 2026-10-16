@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 public class Language {
 
     public static final int CODE_LENGTH = 2;

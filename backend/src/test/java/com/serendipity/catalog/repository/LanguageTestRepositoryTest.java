@@ -28,8 +28,8 @@ class LanguageTestRepositoryTest {
     private static final String TELC_NAME = "telc Deutsch";
     private static final String NAME_PROPERTY = "name";
     private static final long UNKNOWN_LANGUAGE_ID = -1L;
-    private static final String INSERT_LANGUAGE_TEST_SQL = "INSERT INTO language_test (language_id, name) VALUES (?, ?)";
-    private static final String DELETE_LANGUAGE_SQL = "DELETE FROM language WHERE id = ?";
+    private static final String INSERT_LANGUAGE_TEST_SQL = "INSERT INTO language_tests (language_id, name) VALUES (?, ?)";
+    private static final String DELETE_LANGUAGE_SQL = "DELETE FROM languages WHERE id = ?";
 
     @Autowired
     private LanguageTestRepository languageTestRepository;
