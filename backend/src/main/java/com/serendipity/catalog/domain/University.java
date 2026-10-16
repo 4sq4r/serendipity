@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "university")
+@Table(name = "universities")
 public class University {
 
     public static final int WEBSITE_LENGTH = 2048;
