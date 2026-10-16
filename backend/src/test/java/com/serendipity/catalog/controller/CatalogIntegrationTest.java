@@ -21,7 +21,7 @@ abstract class CatalogIntegrationTest {
     protected static final long NON_POSITIVE_ID = 0L;
 
     private static final String TRUNCATE_CATALOG_SQL =
-            "TRUNCATE TABLE university, country, language_test, language RESTART IDENTITY";
+            "TRUNCATE TABLE universities, countries, language_tests, languages RESTART IDENTITY";
 
     @Autowired
     protected TestRestTemplate restTemplate;
