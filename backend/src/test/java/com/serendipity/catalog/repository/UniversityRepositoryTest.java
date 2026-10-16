@@ -26,6 +26,7 @@ class UniversityRepositoryTest {
     private static final String TUM_DESCRIPTION = "Public research university in Munich";
     private static final String HEIDELBERG_NAME = "Heidelberg University";
     private static final String SORBONNE_NAME = "Sorbonne University";
+    private static final String POLYTECHNIQUE_NAME = "École Polytechnique";
     private static final String NAME_PROPERTY = "name";
     private static final long UNKNOWN_COUNTRY_ID = -1L;
     private static final String INSERT_UNIVERSITY_SQL = "INSERT INTO university (country_id, name) VALUES (?, ?)";
@@ -86,5 +87,17 @@ class UniversityRepositoryTest {
         List<University> universities = universityRepository.findAllByCountryId(germany.getId(), Sort.by(NAME_PROPERTY));
 
         assertThat(universities).extracting(University::getName).containsExactly(HEIDELBERG_NAME, TUM_NAME);
+    }
+
+    @Test
+    void sortsNamesAlphabeticallyRegardlessOfAccents() {
+        Country france = countryRepository.save(new Country(FRANCE_CODE, FRANCE_NAME));
+        universityRepository.save(new University(france, SORBONNE_NAME, null, null));
+        universityRepository.save(new University(france, POLYTECHNIQUE_NAME, null, null));
+        universityRepository.flush();
+
+        List<University> universities = universityRepository.findAllByCountryId(france.getId(), Sort.by(NAME_PROPERTY));
+
+        assertThat(universities).extracting(University::getName).containsExactly(POLYTECHNIQUE_NAME, SORBONNE_NAME);
     }
 }
